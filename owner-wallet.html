@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محفظتي المالية | Wash Go</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7f6;
+            font-family: 'Cairo', sans-serif;
+            text-align: right;
+        }
+        
+        .wallet-card {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            border-radius: 30px;
+            padding: 40px 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .transaction-item {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-right: 6px solid #28a745;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+        }
+        
+        .btn-withdraw {
+            background: #ffc107;
+            border: none;
+            color: #000;
+            font-weight: 800;
+            border-radius: 50px;
+            padding: 12px 35px;
+        }
+        
+        .modal-content {
+            border-radius: 25px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <button onclick="location.href='owner-dashboard.html'" class="btn bg-transparent fw-bold p-0"><i class="fas fa-arrow-right ms-2 text-primary"></i> رجوع</button>
+            <h6 class="fw-bold mb-0">المحفظة المالية 💰</h6>
+            <div style="width: 40px;"></div>
+        </div>
+
+        <div class="wallet-card text-center mb-4 shadow">
+            <small class="opacity-75 d-block mb-1">الرصيد المتاح للسحب</small>
+            <h1 class="fw-black mb-4" id="balance">124.50 JOD</h1>
+            <button class="btn btn-withdraw fw-bold" data-bs-toggle="modal" data-bs-target="#withdrawModal">سحب الأرباح</button>
+        </div>
+
+        <div class="row g-3 mb-4 text-center">
+            <div class="col-6">
+                <div class="bg-white p-3 rounded-4 shadow-sm border-bottom border-success border-3 small"><small class="text-muted d-block">أرباح الشهر</small><b class="text-success">340.00 JOD</b></div>
+            </div>
+            <div class="col-6">
+                <div class="bg-white p-3 rounded-4 shadow-sm border-bottom border-primary border-3 small"><small class="text-muted d-block">العمولة</small><b class="text-primary">5%</b></div>
+            </div>
+        </div>
+
+        <h6 class="fw-bold mb-3 small text-muted">السجل الأخير</h6>
+        <div class="transaction-item p-3 d-flex justify-content-between align-items-center">
+            <div>
+                <h6 class="mb-0 fw-bold small">حجز غسيل شامل #9920 (هند أحمد)</h6><small class="text-muted" style="font-size: 10px;">15 شباط 2026</small></div>
+            <div class="text-success fw-bold small">+14.25 JOD</div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="withdrawModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-5 text-center shadow-lg">
+                <i class="fas fa-money-check-alt fa-4x text-warning mb-3"></i>
+                <h5 class="fw-bold mb-3">تأكيد سحب الأرباح</h5>
+                <p class="text-muted small">يا هند، هل أنتِ متأكدة من سحب المبلغ فوراً إلى حسابكِ؟</p>
+                <button onclick="processWithdraw()" class="btn btn-primary w-100 rounded-pill fw-bold py-2 mb-2">نعم، سحب فوري</button>
+                <button class="btn btn-light w-100 rounded-pill fw-bold border py-2" data-bs-dismiss="modal">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-5 text-center shadow-lg">
+                <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
+                <h5 class="fw-bold">تم التحويل بنجاح!</h5>
+                <p class="text-muted small">لقد تم إرسال المبلغ إلى حسابكِ البنكي فوراً يا هند.</p>
+                <button class="btn btn-dark w-100 rounded-pill fw-bold" data-bs-dismiss="modal">ممتاز</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function processWithdraw() {
+            // إغلاق مودال التأكيد وفتح مودال النجاح
+            bootstrap.Modal.getInstance(document.getElementById('withdrawModal')).hide();
+
+            setTimeout(() => {
+                new bootstrap.Modal(document.getElementById('successModal')).show();
+                document.getElementById('balance').innerText = "0.00 JOD";
+            }, 500);
+        }
+    </script>
+</body>
+
+</html>

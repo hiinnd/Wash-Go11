@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موافقات المحطات | Wash Go Admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #f4f7fa;
+            text-align: right;
+        }
+        
+        .header-section {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .approval-card {
+            background: white;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+        }
+        
+        .processed {
+            opacity: 0.5;
+            filter: grayscale(1);
+            pointer-events: none;
+        }
+        
+        .station-logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: #f0f7ff;
+            color: #007bff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .info-label {
+            font-size: 0.7rem;
+            color: #6c757d;
+        }
+        
+        .info-value {
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+        
+        .btn-action {
+            border-radius: 10px;
+            padding: 5px 12px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            border: none;
+            color: white;
+        }
+        
+        .notification-btn {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 8px 12px;
+            border: none;
+            position: relative;
+        }
+        
+        .badge-dot {
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            width: 8px;
+            height: 8px;
+            background: #dc3545;
+            border-radius: 50%;
+        }
+        
+        .modal-content {
+            border-radius: 25px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-section">
+        <div class="container d-flex justify-content-between align-items-center">
+            <button onclick="location.href='admin-dashboard.html'" class="btn btn-light border-0 fw-bold">
+                <i class="fas fa-arrow-right ms-2 text-primary"></i> العودة
+            </button>
+            <h6 class="fw-bold mb-0">طلبات انضمام المحطات</h6>
+            <button class="notification-btn" onclick="showNotifModal()"><i class="fas fa-bell text-muted"></i><span class="badge-dot" id="dot"></span></button>
+        </div>
+    </div>
+
+    <div class="container mt-3">
+        <div class="approval-card" id="st-1">
+            <div class="row align-items-center g-3">
+                <div class="col-auto">
+                    <div class="station-logo"><i class="fas fa-car-wash"></i></div>
+                </div>
+                <div class="col">
+                    <div class="info-label">المحطة</div>
+                    <div class="info-value">مغسلة التميز الحديثة</div>
+                </div>
+                <div class="col d-none d-md-block">
+                    <div class="info-label">الموقع</div>
+                    <div class="info-value">عمان، الجبيهة</div>
+                </div>
+                <div class="col-auto text-end">
+                    <button class="btn-action bg-success" onclick="openConfirm('st-1', 'موافقة')">موافقة</button>
+                    <button class="btn-action bg-danger ms-1" onclick="openConfirm('st-1', 'رفض')">رفض</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="approval-card" id="st-2">
+            <div class="row align-items-center g-3">
+                <div class="col-auto">
+                    <div class="station-logo"><i class="fas fa-gas-pump"></i></div>
+                </div>
+                <div class="col">
+                    <div class="info-label">المحطة</div>
+                    <div class="info-value">واش آند غو - العقبة</div>
+                </div>
+                <div class="col d-none d-md-block">
+                    <div class="info-label">الموقع</div>
+                    <div class="info-value">العقبة، الشاطئ</div>
+                </div>
+                <div class="col-auto text-end">
+                    <button class="btn-action bg-success" onclick="openConfirm('st-2', 'موافقة')">موافقة</button>
+                    <button class="btn-action bg-danger ms-1" onclick="openConfirm('st-2', 'رفض')">رفض</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4 text-center shadow-lg">
+                <div id="modalIcon" class="mb-3 fs-1"></div>
+                <h5 class="fw-bold">تأكيد الإجراء</h5>
+                <p class="text-muted small">يا هند، هل أنتِ متأكدة من <span id="actionText" class="fw-bold"></span> هذا الطلب؟</p>
+                <div class="d-flex gap-2">
+                    <button onclick="executeAction()" class="btn btn-primary w-100 rounded-pill fw-bold">تأكيد</button>
+                    <button data-bs-dismiss="modal" class="btn btn-light w-100 rounded-pill border">إلغاء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="notifModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4 text-center">
+                <i class="fas fa-bell text-primary fs-1 mb-3"></i>
+                <h5 class="fw-bold">تنبيهات النظام</h5>
+                <p class="text-muted small">لديكِ طلبات جديدة بانتظار المراجعة من إربد والزرقاء.</p>
+                <button class="btn btn-dark w-100 rounded-pill fw-bold" data-bs-dismiss="modal" onclick="document.getElementById('dot').style.display='none'">فهمت</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentTargetId = '';
+        const cModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+        const nModal = new bootstrap.Modal(document.getElementById('notifModal'));
+
+        function openConfirm(id, action) {
+            currentTargetId = id;
+            document.getElementById('actionText').innerText = action;
+            document.getElementById('modalIcon').innerHTML = action === 'موافقة' ?
+                '<i class="fas fa-check-circle text-success"></i>' : '<i class="fas fa-times-circle text-danger"></i>';
+            cModal.show();
+        }
+
+        function executeAction() {
+            document.getElementById(currentTargetId).classList.add('processed');
+            cModal.hide();
+        }
+
+        function showNotifModal() {
+            nModal.show();
+        }
+    </script>
+</body>
+
+</html>

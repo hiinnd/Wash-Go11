@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سجل الحجوزات | Wash Go</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        
+        .history-header {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 40px 0;
+            border-radius: 0 0 40px 40px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .back-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 10px;
+            border: none;
+            font-size: 0.85rem;
+        }
+        
+        .history-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-right: 5px solid transparent;
+            transition: 0.3s ease;
+        }
+        /* حالات الكروت */
+        
+        .status-completed {
+            border-right-color: #28a745;
+        }
+        
+        .status-cancelled {
+            border-right-color: #dc3545;
+        }
+        
+        .status-pending {
+            border-right-color: #ffc107;
+        }
+        
+        .filter-btn {
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border: 1px solid #dee2e6;
+            background: white;
+            color: #6c757d;
+            margin: 0 3px;
+            cursor: pointer;
+        }
+        
+        .filter-btn.active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        
+        .price-tag {
+            color: #28a745;
+            font-weight: 900;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="history-header text-center">
+        <button onclick="location.href='home.html'" class="back-link"><i class="fas fa-arrow-right ms-2"></i> رجوع</button>
+        <div class="container">
+            <i class="fas fa-history fa-3x mb-3 mt-2"></i>
+            <h2 class="fw-bold">سجل الحجوزات</h2>
+            <p class="opacity-75">يا <span id="userName">هند</span>، هنا تجدين جميع غسلاتك السابقة</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="d-flex justify-content-center mb-4 overflow-auto py-2">
+            <button class="filter-btn active" data-filter="all">الكل</button>
+            <button class="filter-btn" data-filter="completed">مكتمل</button>
+            <button class="filter-btn" data-filter="pending">قيد التنفيذ</button>
+            <button class="filter-btn" data-filter="cancelled">ملغي</button>
+        </div>
+
+        <div id="historyList">
+            <div class="history-card status-pending shadow-sm" data-status="pending">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div class="text-end">
+                        <h6 class="fw-bold mb-1">مغسلة التميز الحديثة</h6>
+                        <p class="text-muted small mb-2"><i class="far fa-calendar-alt ms-1"></i> اليوم، 15 فبراير 2026</p>
+                        <span class="badge bg-warning text-dark">قيد التنفيذ</span>
+                    </div>
+                    <div class="text-start">
+                        <div class="price-tag">12.00 JOD</div>
+                        <a href="live-tracking.html" class="small text-primary text-decoration-none d-block mt-2">تتبع الآن</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-card status-completed shadow-sm" data-status="completed">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div class="text-end">
+                        <h6 class="fw-bold mb-1">واش آند غو - خلدا</h6>
+                        <p class="text-muted small mb-2"><i class="far fa-calendar-alt ms-1"></i> 10 فبراير 2026</p>
+                        <span class="badge bg-success text-white">مكتمل</span>
+                    </div>
+                    <div class="text-start">
+                        <div class="price-tag">8.50 JOD</div>
+                        <button class="btn btn-link btn-sm text-muted p-0 text-decoration-none mt-2">تحميل الفاتورة</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-card status-cancelled shadow-sm" data-status="cancelled">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div class="text-end">
+                        <h6 class="fw-bold mb-1">محطة صويلح السريعة</h6>
+                        <p class="text-muted small mb-2"><i class="far fa-calendar-alt ms-1"></i> 02 فبراير 2026</p>
+                        <span class="badge bg-danger text-white">ملغي</span>
+                    </div>
+                    <div class="text-start">
+                        <div class="price-tag text-muted">6.00 JOD</div>
+                        <p class="small text-danger mb-0 mt-2">مسترد للمحفظة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. عرض اسم المستخدم
+            document.getElementById('userName').innerText = localStorage.getItem('userName') || "هند";
+
+            // 2. منطق الفلترة
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.history-card');
+
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // تغيير الزر النشط
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    // إظهار وإخفاء الكروت
+                    cards.forEach(card => {
+                        const status = card.getAttribute('data-status');
+
+                        if (filterValue === 'all' || filterValue === status) {
+                            card.style.display = 'block';
+                            // إضافة أنيميشن بسيط عند الظهور
+                            card.style.opacity = '0';
+                            setTimeout(() => card.style.opacity = '1', 50);
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

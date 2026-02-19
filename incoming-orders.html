@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الطلبات الواردة | Wash Go</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f0f2f5;
+            padding-bottom: 50px;
+            text-align: right;
+        }
+        
+        .orders-header {
+            background: #ffffff;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .order-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .order-type-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        .type-home {
+            background: #e7f1ff;
+            color: #007bff;
+        }
+        
+        .btn-action {
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-weight: 700;
+            border: none;
+            font-size: 0.9rem;
+        }
+        
+        .btn-back-nav {
+            background: none;
+            border: none;
+            font-weight: bold;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        /* Modal Custom Style */
+        
+        .modal-content {
+            border-radius: 25px;
+            border: none;
+        }
+        
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="orders-header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <button onclick="handleBackAction()" class="btn-back-nav">
+                <i class="fas fa-arrow-right ms-2 text-primary"></i> رجوع
+            </button>
+            <h6 class="fw-bold mb-0">طلبات الزبائن الواردة</h6>
+            <span class="badge bg-danger rounded-pill px-3" id="pendingCount">1 طلب جديد</span>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <h6 class="fw-bold mb-4">طلبات تحتاج موافقة لتفعيل الدفع</h6>
+
+        <div class="order-card border-end border-4 border-primary shadow-sm" id="card-9920">
+            <span class="order-type-badge type-home"><i class="fas fa-home ms-1"></i> خدمة منزلية</span>
+            <div class="row align-items-center">
+                <div class="col-8">
+                    <h6 class="fw-bold mb-1">الزبونة: هند أحمد <span class="text-muted small">#WG-9920</span></h6>
+                    <p class="mb-0 small text-muted">غسيل شامل نانو | الجبيهة</p>
+                    <p class="mb-0 small text-primary fw-bold mt-1">المبلغ المتوقع: 12.00 JOD</p>
+                </div>
+                <div class="col-4 text-start">
+                    <button class="btn btn-success btn-action mb-2 w-100" onclick="updateOrder('9920', 'Approved')">قبول</button>
+                    <button class="btn btn-outline-danger btn-action w-100" onclick="updateOrder('9920', 'Rejected')">رفض</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="noOrders" class="text-center mt-5 d-none">
+            <i class="fas fa-check-circle fa-3x text-muted mb-3"></i>
+            <p class="text-muted small fw-bold">لا توجد طلبات معلقة حالياً</p>
+        </div>
+    </div>
+
+    <div class="modal fade" id="statusModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content shadow-lg">
+                <div class="modal-body text-center py-5">
+                    <div id="modalIcon" class="modal-icon"></div>
+                    <h4 id="modalTitle" class="fw-bold"></h4>
+                    <p id="modalBody" class="text-muted"></p>
+                    <button type="button" class="btn btn-primary rounded-pill px-5 fw-bold mt-3" data-bs-dismiss="modal">موافق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function handleBackAction() {
+            const role = localStorage.getItem('userRole');
+            window.location.href = (role === 'admin') ? 'admin-dashboard.html' : 'owner-dashboard.html';
+        }
+
+        function updateOrder(orderId, status) {
+            localStorage.setItem(`wash_go_order_${orderId}_status`, status);
+
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            const modalIcon = document.getElementById('modalIcon');
+
+            if (status === 'Approved') {
+                modalIcon.innerHTML = '<i class="fas fa-check-circle text-success"></i>';
+                modalTitle.innerText = "تم القبول!";
+                modalTitle.className = "fw-bold text-success";
+                modalBody.innerText = "يا هند، تم إرسال إشعار للزبونة لإتمام عملية الدفع بنجاح.";
+            } else {
+                modalIcon.innerHTML = '<i class="fas fa-times-circle text-danger"></i>';
+                modalTitle.innerText = "تم الرفض";
+                modalTitle.className = "fw-bold text-danger";
+                modalBody.innerText = "لقد تم رفض الطلب وإغلاقه بنجاح.";
+            }
+
+            // إظهار المودال
+            const myModal = new bootstrap.Modal(document.getElementById('statusModal'));
+            myModal.show();
+
+            // حركة إخفاء البطاقة من القائمة
+            const card = document.getElementById('card-' + orderId);
+            card.style.transition = "0.4s";
+            card.style.opacity = "0";
+            card.style.transform = "translateY(-10px)";
+
+            setTimeout(() => {
+                card.remove();
+                if (document.querySelectorAll('.order-card').length === 0) {
+                    document.getElementById('noOrders').classList.remove('d-none');
+                    document.getElementById('pendingCount').innerText = "0 طلبات";
+                }
+            }, 400);
+        }
+    </script>
+</body>
+
+</html>

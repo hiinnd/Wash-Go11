@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>باقات الاشتراك | Wash Go</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #f8f9fa;
+            text-align: right;
+            padding-bottom: 50px;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, #007bff, #6610f2);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .plan-card {
+            background: white;
+            border-radius: 30px;
+            padding: 30px 20px;
+            transition: 0.3s;
+            border: none;
+            text-align: center;
+            height: 100%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .featured {
+            border: 2px solid #007bff;
+            position: relative;
+        }
+        
+        .badge-popular {
+            position: absolute;
+            top: -12px;
+            right: 50%;
+            transform: translateX(50%);
+            background: #ffc107;
+            padding: 4px 15px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        
+        .plan-price {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #007bff;
+        }
+        
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+        
+        .plan-features li {
+            margin-bottom: 10px;
+        }
+        
+        .plan-features i {
+            color: #28a745;
+            margin-left: 8px;
+        }
+        
+        .btn-subscribe {
+            border-radius: 50px;
+            padding: 10px;
+            font-weight: 700;
+            width: 100%;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+        
+        .modal-content {
+            border-radius: 30px;
+            border: none;
+        }
+        
+        .pay-option {
+            background: #f0f7ff;
+            border-radius: 20px;
+            padding: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .pay-option:hover {
+            border-color: #007bff;
+            background: #e1efff;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header-section shadow">
+        <a href="home.html" class="back-btn"><i class="fas fa-arrow-right ms-2"></i> رجوع</a>
+        <h2 class="fw-bold">باقات التوفير</h2>
+        <p class="opacity-75 small">يا هند، اشتركي الآن واحصلي على غسلات مجانية</p>
+    </header>
+
+    <main class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="plan-card">
+                    <i class="fas fa-medal fs-1 text-secondary mb-3"></i>
+                    <h4 class="fw-bold">الفضية</h4>
+                    <div class="plan-price">10<span class="fs-6 text-muted"> JOD</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 1 غسلة شاملة مجانية</li>
+                        <li><i class="fas fa-star"></i> تلميع إطارات مجاني</li>
+                    </ul>
+                    <button onclick="openPayModal('الفضية', 10)" class="btn btn-outline-primary btn-subscribe">اشترك الآن</button>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="plan-card featured">
+                    <div class="badge-popular">الأكثر طلباً</div>
+                    <i class="fas fa-crown fs-1 text-warning mb-3"></i>
+                    <h4 class="fw-bold">الذهبية</h4>
+                    <div class="plan-price">25<span class="fs-6 text-muted"> JOD</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> 3 غسلات شاملة مجانية</li>
+                        <li><i class="fas fa-bolt"></i> أولوية الحجز في المحطات</li>
+                    </ul>
+                    <button onclick="openPayModal('الذهبية', 25)" class="btn btn-primary btn-subscribe shadow">اشترك الآن</button>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="plan-card">
+                    <i class="fas fa-gem fs-1 text-info mb-3"></i>
+                    <h4 class="fw-bold">الماسية</h4>
+                    <div class="plan-price">45<span class="fs-6 text-muted"> JOD</span></div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-check"></i> غسيل غير محدود شهرياً</li>
+                        <li><i class="fas fa-home"></i> 2 غسيل منزلي مجاني</li>
+                    </ul>
+                    <button onclick="openPayModal('الماسية', 45)" class="btn btn-outline-primary btn-subscribe">اشترك الآن</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="payModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-4 text-center">
+                <h5 class="fw-bold mb-4">الدفع لباقة <span id="pName" class="text-primary"></span></h5>
+                <div class="pay-option mb-3 d-flex align-items-center" onclick="payWithVisa()">
+                    <i class="fas fa-credit-card fa-2x text-primary ms-3"></i>
+                    <div class="text-end">
+                        <h6 class="fw-bold mb-0">البطاقة البنكية</h6>
+                        <small class="text-muted small">دفع آمن عبر بوابة البنك</small>
+                    </div>
+                </div>
+                <div class="pay-option d-flex align-items-center" onclick="payWithWallet()">
+                    <i class="fas fa-wallet fa-2x text-success ms-3"></i>
+                    <div class="text-end">
+                        <h6 class="fw-bold mb-0">محفظة التطبيق</h6>
+                        <small class="text-muted small">الخصم من رصيدك الحالي</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="successWalletModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-5 text-center shadow-lg">
+                <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
+                <h5 class="fw-bold">تم الاشتراك بنجاح!</h5>
+                <p class="text-muted small">تم خصم القيمة من محفظتكِ بنجاح. باقتكِ الآن نشطة يا هند!</p>
+                <button class="btn btn-dark w-100 rounded-pill fw-bold" onclick="location.href='home.html'">ممتاز</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let sPlan = "",
+            sPrice = 0;
+
+        function openPayModal(name, price) {
+            sPlan = name;
+            sPrice = price;
+            document.getElementById('pName').innerText = name;
+            new bootstrap.Modal(document.getElementById('payModal')).show();
+        }
+
+        function payWithVisa() {
+            localStorage.setItem('finalPrice', sPrice);
+            localStorage.setItem('booking_service', 'اشتراك باقة ' + sPlan);
+            window.location.href = 'payment-gateway.html';
+        }
+
+        function payWithWallet() {
+            bootstrap.Modal.getInstance(document.getElementById('payModal')).hide();
+            setTimeout(() => {
+                new bootstrap.Modal(document.getElementById('successWalletModal')).show();
+                localStorage.setItem('userPlan', sPlan);
+            }, 500);
+        }
+    </script>
+</body>
+
+</html>

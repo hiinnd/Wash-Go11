@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التقارير المالية | Wash Go Admin</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f4f6f9;
+            text-align: right;
+        }
+        
+        .fin-header {
+            background: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .revenue-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            border: none;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .revenue-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .icon-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .bg-soft-blue {
+            background: #e7f1ff;
+            color: #007bff;
+        }
+        
+        .bg-soft-green {
+            background: #e9f7ef;
+            color: #28a745;
+        }
+        
+        .chart-card,
+        .table-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-top: 20px;
+        }
+        
+        .btn-back {
+            border: none;
+            background: transparent;
+            font-weight: bold;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="fin-header">
+        <div class="container d-flex justify-content-between align-items-center">
+            <button onclick="window.location.href='admin-dashboard.html'" class="btn-back">
+                <i class="fas fa-arrow-right ms-2 text-primary"></i> رجوع
+            </button>
+            <h6 class="fw-bold mb-0">تقارير المبيعات والأرباح</h6>
+            <button onclick="alert('جاري تجهيز ملف Excel...')" class="btn btn-success btn-sm rounded-pill px-3 fw-bold">تصدير التقرير</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="revenue-card">
+                    <div class="icon-circle bg-soft-blue"><i class="fas fa-wallet"></i></div>
+                    <small class="text-muted fw-bold">إجمالي المبيعات</small>
+                    <h3 class="fw-bold mt-1">3,240 <small class="fs-6">JOD</small></h3>
+                    <p class="small text-success mb-0"><i class="fas fa-caret-up"></i> 15% منذ الشهر الماضي</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="revenue-card">
+                    <div class="icon-circle bg-soft-green"><i class="fas fa-chart-pie"></i></div>
+                    <small class="text-muted fw-bold">صافي أرباح التطبيق (5%)</small>
+                    <h3 class="fw-bold mt-1 text-success">219.50 <small class="fs-6">JOD</small></h3>
+                    <p class="small text-primary mb-0">أرباحكِ الصافية يا هند</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <h6 class="fw-bold mb-4"><i class="fas fa-chart-line ms-2 text-primary"></i> تحليل المبيعات الأسبوعي</h6>
+            <canvas id="revenueChart" style="max-height: 300px;"></canvas>
+        </div>
+
+
+
+        <div class="table-card mb-5">
+            <h6 class="fw-bold mb-4"><i class="fas fa-history ms-2 text-primary"></i> سجل المدفوعات الأخير</h6>
+            <div class="table-responsive">
+                <table class="table align-middle text-end">
+                    <thead class="table-light small">
+                        <tr>
+                            <th>التاريخ</th>
+                            <th>الزبون</th>
+                            <th>القيمة</th>
+                            <th>عمولة (Wash Go)</th>
+                            <th>الحالة</th>
+                        </tr>
+                    </thead>
+                    <tbody class="small">
+                        <tr>
+                            <td>2026-02-15</td>
+                            <td class="fw-bold">سارة أحمد</td>
+                            <td class="fw-bold">12.00 JOD</td>
+                            <td class="text-primary fw-bold">0.60 JOD</td>
+                            <td><span class="badge bg-success rounded-pill">مكتملة</span></td>
+                        </tr>
+                        <tr>
+                            <td>2026-02-14</td>
+                            <td class="fw-bold">محمد خالد</td>
+                            <td class="fw-bold">15.00 JOD</td>
+                            <td class="text-primary fw-bold">0.75 JOD</td>
+                            <td><span class="badge bg-success rounded-pill">مكتملة</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // رسم البيان التفاعلي
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['السبت', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'],
+                    datasets: [{
+                        label: 'المبيعات اليومية (JOD)',
+                        data: [150, 220, 180, 300, 250, 450, 400],
+                        borderColor: '#007bff',
+                        backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+
+</html>

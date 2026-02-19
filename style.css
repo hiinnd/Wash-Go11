@@ -1,0 +1,168 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    overflow-x: hidden;
+    color: #333;
+    text-align: right;
+    direction: rtl;
+    background-color: #f8faff;
+}
+
+
+/* الهيدر واللوجو */
+
+.navbar {
+    transition: 0.4s;
+    padding: 10px 0;
+    z-index: 1050;
+}
+
+.navbar-logo {
+    height: auto;
+    width: 110px;
+    /* حجم متوازن */
+}
+
+.hero-logo {
+    width: 180px;
+    height: auto;
+    max-width: 65%;
+    margin-bottom: 15px;
+}
+
+.nav-link {
+    color: white !important;
+    font-weight: 500;
+}
+
+
+/* الهيرو (الواجهة) */
+
+.main-hero {
+    height: 500px;
+    background: url('Images/carwash.jpg') center/cover fixed;
+    position: relative;
+}
+
+.hero-overlay {
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 26, 51, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+
+/* قسم الخدمات والكروت الستة */
+
+#services {
+    background-color: #e6f0ff;
+    padding: 60px 0;
+}
+
+.service-card {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 50, 120, 0.08);
+    transition: 0.4s ease;
+    height: 100%;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+}
+
+.service-card img {
+    height: 220px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+
+/* قسم احجز الآن - العودة للخلفية بالصورة */
+
+.cta-banner {
+    background: linear-gradient(rgba(0, 30, 60, 0.85), rgba(0, 30, 60, 0.85)), url('Images/wash.jpg') center/cover fixed;
+    padding: 80px 0;
+}
+
+
+/* الفوتر مع الخلفية */
+
+.footer-dark {
+    border-top: 4px solid #007bff;
+    padding: 60px 0 20px;
+    background: linear-gradient(rgba(0, 30, 60, 0.92), rgba(0, 30, 60, 0.92)), url('Images/wash.jpg') center/cover fixed;
+    color: white;
+}
+
+.footer-logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+
+/* ميديا كويري للموبايل */
+
+@media (max-width: 768px) {
+    .main-hero {
+        height: 400px;
+    }
+    .navbar-logo {
+        width: 85px;
+    }
+    .hero-logo {
+        width: 130px;
+    }
+    .display-6 {
+        font-size: 1.6rem !important;
+    }
+    .service-card img {
+        height: 190px;
+    }
+    .navbar-collapse {
+        background: rgba(0, 26, 51, 0.98);
+        padding: 20px;
+        border-radius: 15px;
+        margin-top: 10px;
+        text-align: center;
+    }
+}
+
+
+/* الأيقونات الاجتماعية */
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: 0.4s;
+}
+
+.social-icon.facebook:hover {
+    background: #1877F2;
+}
+
+.social-icon.instagram:hover {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+}
+
+.social-icon.whatsapp:hover {
+    background: #25D366;
+}

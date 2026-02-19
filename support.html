@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدعم الفني | Wash Go</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f8f9fa;
+            text-align: right;
+        }
+        
+        .support-header {
+            background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+            color: white;
+            padding: 40px 0 60px;
+            border-radius: 0 0 40px 40px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .nav-link-support {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 10px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .faq-card {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border: 1px solid #eee;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 15px 20px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            padding: 0 20px 15px;
+            color: #6c757d;
+            font-size: 0.9rem;
+            display: none;
+            line-height: 1.6;
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-control-support {
+            border-radius: 12px;
+            padding: 10px 15px;
+            border: 1px solid #eee;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        
+        .btn-send {
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px;
+            font-weight: bold;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="support-header text-center shadow">
+        <button onclick="window.location.href='home.html'" class="nav-link-support">
+    <i class="fas fa-arrow-right ms-2"></i> رجوع
+</button>
+        <i class="fas fa-headset fa-3x mb-2 mt-3"></i>
+        <h2 class="fw-bold">كيف يمكننا مساعدتكِ؟</h2>
+        <p class="opacity-75">فريق Wash Go متواجد لخدمتكِ دائماً</p>
+    </div>
+
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <h6 class="fw-bold mb-3"><i class="fas fa-question-circle ms-2 text-primary"></i> الأسئلة الشائعة</h6>
+
+                <div class="faq-card shadow-sm" onclick="toggleFaq(this)">
+                    <div class="faq-question">ما هو نظام بصمة الجهاز؟ <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">هو نظام أمان يربط حسابكِ بجهازكِ لضمان الالتزام بسداد المستحقات ومنع الحسابات الوهمية.</div>
+                </div>
+
+                <div class="faq-card shadow-sm" onclick="toggleFaq(this)">
+                    <div class="faq-question">كيف أتتبع سيارتي؟ <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">عبر خيار "التتبع المباشر" في لوحة التحكم، يمكنكِ رؤية موقع سيارتكِ لحظة بلحظة.</div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="contact-card">
+                    <h6 class="fw-bold mb-3 text-primary">أرسلي استفساركِ</h6>
+                    <input type="text" id="subject" class="form-control-support" placeholder="عنوان الموضوع...">
+                    <textarea id="message" class="form-control-support" rows="4" placeholder="تفاصيل المشكلة..."></textarea>
+                    <button onclick="sendTicket()" class="btn-send shadow">إرسال الطلب <i class="fas fa-paper-plane ms-1"></i></button>
+
+                    <div class="text-center mt-3">
+                        <small class="text-muted d-block">أو تواصل معنا عبر</small>
+                        <a href="#" class="text-success fw-bold text-decoration-none small"><i class="fab fa-whatsapp ms-1"></i> واتساب مباشر</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleFaq(card) {
+            const answer = card.querySelector('.faq-answer');
+            const icon = card.querySelector('.fa-chevron-down');
+            const isVisible = answer.style.display === 'block';
+
+            // إغلاق الكل أولاً
+            document.querySelectorAll('.faq-answer').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.fa-chevron-down').forEach(el => el.style.transform = 'rotate(0deg)');
+
+            if (!isVisible) {
+                answer.style.display = 'block';
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        function sendTicket() {
+            const userName = localStorage.getItem('userName') || "هند";
+            if (document.getElementById('subject').value === "") return alert("يرجى كتابة الموضوع");
+            alert(`شكراً يا ${userName}، استلمنا طلبكِ وسنرد خلال 24 ساعة.`);
+        }
+
+        function handleBack() {
+            const role = localStorage.getItem('userRole');
+            if (role === 'admin') window.location.href = 'admin-dashboard.html';
+            else if (role === 'owner') window.location.href = 'owner-dashboard.html';
+            else window.location.href = 'user-dashboard.html';
+        }
+    </script>
+</body>
+
+</html>
